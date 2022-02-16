@@ -5,37 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+
 </head>
 <body>
     
-    <script src="js/app.js"></script>
-<header>   
+<header id="header"> 
+  
      <nav>  
         <ul>  
-        <li>  
-        <a href="#"> Home </a>  
-        </li>  
-        <li>  
-        <a href="#"> About us </a>  
-        </li>  
-        <li>  
-        <a href="#"> Contact us </a>  
-        </li>    
+            <li class="nav-link"><a href="/">Home</a></li>
+            <li class="nav-link"><a href="/aboutus.html">About Us</a></li> 
         </ul>  
         </nav>
     </header>
-<main>
 
 
+<main id="main">
+    <form id="dataform">
+        <fieldset>
+            <legend> Employee Information</legend>
+<label for="name">Full name </label>  <input type="text" name="name" id = "name">
+<br>
+<label for="Department ">Department  </label> 
+<select id ="select" >
+    <option value="Administration">Administration</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Development">Development</option>
+    <option value="Finance">Finance</option>
+  </select>
+<br>
+<label for="Level ">Level  </label> 
+<select id = "level">
+    <option value="Junior">Junior</option>
+    <option value="Mid-Senior">Mid-Senior</option>
+    <option value="Senior">Senior</option>
+  </select>
+  <br>
+  <label for="Image url">Image url</label> 
+  <input type="text" name="=Image url" id = "Imageurl">
+  <br>
+  <button id="submit">Submit </button>
+   </fieldset>
+    </form>
+   
 
-
+<div id = "allEmployeesDiv">
+    
+</div>
 </main>
 
-<footer>
+<footer >
     <div class="copy-right"> All rights reserved 2022 &copy;</div>
     <a href="https://facebook.com/batman">
         <img src="https://s3.amazonaws.com/flashissue/MsIJsIsDT9WLAxxH4aIK_OgdHV3vxSR2737LGd8cq_facebook.png" alt="Smiley face"></a>
 
 </footer>
+<script src="js/app.js"></script>
+
 </body>
 </html>
