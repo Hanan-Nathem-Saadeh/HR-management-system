@@ -1,10 +1,10 @@
-'use strict';
+ 'use strict';
 var allEmployee =[];
+let employeeIsdStarter=999;
+let allEmployeesDiv= document.getElementById("allEmployeesDiv");
+let form = document.getElementById("form");
 
-let form = document.getElementById("dataform");
-
-let allEmployees = document.getElementById(allEmployeesDiv) 
-function EmployeeInfo (FullName,Department,Level,ImageURL)
+function Employee (FullName,Department,Level,ImageURL)
 {
 this.EmployeeID=0;
 this.FullName=FullName;
@@ -14,38 +14,59 @@ this.ImageURL=ImageURL;
 this.salary = 0 ;
 allEmployee.push(this);
 }
-let Ghazi = new EmployeeInfo(1000, "Ghazi Samer", "Administration", "Senior","css/assets/imgs/Ghazi.jpg");
-let Lana  = new EmployeeInfo(1001, "Lana Ali", "Finance","Senior","URL");
-let Tamara = new EmployeeInfo(1002, "Tamara Ayoub","Marketing", "Senior","URL");
-let Safi = new EmployeeInfo(1003, "Safi Walid","Administration","Mid-Senior","URL");
-let Omar = new EmployeeInfo(1004, "Omar Zaid", "Development","Senior","URL");
-let Rana = new EmployeeInfo(1005, "Rana Saleh","Development","Junior","URL");
-let Hadi = new EmployeeInfo(1006, "Hadi Ahmad","Financen","Mid-Senior","URL");
+let Ghazi = new Employee("Ghazi Samer", "Administration", "Senior","assets/img/Ghazi.jpg");
+let Lana  = new Employee("Lana Ali", "Finance","Senior","assets/img/Lana.jpg");
+let Tamara = new Employee("Tamara Ayoub","Marketing", "Senior","assets/img/Tamara.jpg");
+let Safi = new Employee("Safi Walid","Administration","Mid-Senior","assets/img/Safi.jpg");
+let Omar = new Employee("Omar Zaid", "Development","Senior","assets/img/Omar.jpg");
+let Rana = new Employee("Rana Saleh","Development","Junior","assets/img/Rana.jpg");
+let Hadi = new Employee("Hadi Ahmad","Financen","Mid-Senior","assets/img/Hadi.jpg");
 
-EmployeeInfo.prototype.generateID = function () {
-    this.EmployeeID = Math.floor(1000 + Math.random() * 9000);
-  };
-EmployeeInfo.prototype.render = function()
+function generatId()
 {
+    return ++employeeIsdStarter;
+}
+Employee.prototype.gitID = function () {
+    this.EmployeeID=generatId();
+  };
+
+Employee.prototype.showEmploee = function()
+{
+let divShow =document.createElement("div");
+divShow.setAttribute('class',"divShow")
+
+  let imgShow = document.createElement("img");
+  imgShow.setAttribute("src", this.ImageURL);
+  divShow.appendChild(imgShow);
+
+
  let title =document.createElement("h3");
-  title.textContent=this.FullName;
-  allEmployeesDiv.appendChild(title);
+  title.textContent= "Name: "+this.FullName;
+  divShow.appendChild(title);
 
-  let image = document.createElement("img");
-  image.setAttribute("src", this.ImageURL);
-  allEmployeesDiv.appendChild(image);
+
+  let titleID = document.createElement("h3");
+  titleID.textContent= "ID: "+this.EmployeeID;
+  divShow.appendChild(titleID);
   
-  let dep =document.createElement("h1");
-  dep.textContent=this.Department;
-  allEmployeesDiv.appendChild(dep);
+  let titleDep =document.createElement("h3");
+  titleDep.textContent="Department : "+this.Department;
+  divShow.appendChild(titleDep);
 
-  let lev =document.createElement("h1");
-  lev.textContent=this.Level;
-  allEmployeesDiv.appendChild(lev);
+  let titlelev =document.createElement("h3");
+  titlelev.textContent="Level :  "+ this.Level;
+  divShow.appendChild(titlelev);
+
+  let titleSal =document.createElement("h3");
+  titleSal.textContent="Salary :  "+ ` ${this.salary}$`;
+  divShow.appendChild(titleSal);
+  allEmployeesDiv.appendChild(divShow);
+
+
 }
 
  
-EmployeeInfo.prototype.getSalary = function () {
+Employee.prototype.getSalary = function () {
     let max;
     let min;
     if (this.Level=="Senior"){
@@ -68,28 +89,31 @@ function randInteger( min, max )
 {
 return Math.floor(Math.random()  * (max - min + 1) ) + min;
 }
+
 function renderAll(){
 
     allEmployeesDiv.innerHTML="";
 
 for (let i = 0; i <  allEmployee.length ; i++) {
     allEmployee[i].getSalary();
-    allEmployee[i].render();
+    allEmployee[i].gitID();
+    allEmployee[i].showEmploee();
 }
-}
-renderAll();
+// }
+// renderAll();
   form.addEventListener("submit" , handelsubmit)
   function handelsubmit(event)
   {
+      
 event.preventDefault();
-let FullName = event.target.name.value;
-let Department =event.target.select.value;
+let FullName = event.target.nameInput.value;
+let Department =event.target.Department.value;
 let level =event.target.level.value;
-let ImageURL =event.target.Imageurl.value;
-
-let newEmployee =new EmployeeInfo(FullName,Department, level ,ImageURL);
-newEmployee.generateID();
+let ImageURL =event.target.ImageUrl.value;
+ let newEmployee =new Employee(FullName,Department, level ,ImageURL);
+newEmployee.gitID();
 newEmployee.getSalary();
-renderAll();
-form.reset();
-  }
+newEmployee.showEmploee();
+// form.reset();
+   }}
+   renderAll();
