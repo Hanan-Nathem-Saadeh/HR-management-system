@@ -2,6 +2,8 @@
 var allEmployee =[];
 let employeeIsdStarter=999;
 let allEmployeesDiv= document.getElementById("allEmployeesDiv");
+const cardsContainer = document.getElementById("emps-cards");
+
 let form = document.getElementById("form");
 
 function Employee (FullName,Department,Level,ImageURL)
@@ -64,7 +66,23 @@ divShow.setAttribute('class',"divShow")
 
 
 }
-
+function saveData()
+{
+let formatedData=JSON.stringify(allEmployee);
+  localStorage.setItem("Employees",formatedData);
+}
+function getData(){
+let employeesData=localStorage.getItem("Employees");
+let parseEmployee=JSON.parse(employeesData);
+if(parseEmployee != null){
+  allEmployee=[];
+for(let i=0;i<parseEmployee.length;i++)
+{
+  new Employee(parseEmployee[i].FullName,parseEmployee[i].Department,parseEmployee[i].Level,parseEmployee[i].ImageURL);
+};
+}
+renderAll();
+}
  
 Employee.prototype.getSalary = function () {
     let max;
@@ -99,8 +117,7 @@ for (let i = 0; i <  allEmployee.length ; i++) {
     allEmployee[i].gitID();
     allEmployee[i].showEmploee();
 }
-// }
-// renderAll();
+
   form.addEventListener("submit" , handelsubmit)
   function handelsubmit(event)
   {
@@ -110,10 +127,14 @@ let FullName = event.target.nameInput.value;
 let Department =event.target.Department.value;
 let level =event.target.level.value;
 let ImageURL =event.target.ImageUrl.value;
- let newEmployee =new Employee(FullName,Department, level ,ImageURL);
+ let newEmployee =new Employee(FullName,Department,Level,ImageURL);
 newEmployee.gitID();
 newEmployee.getSalary();
 newEmployee.showEmploee();
-// form.reset();
+form.reset();
+saveData();
+
    }}
+
    renderAll();
+   getData();
