@@ -1,37 +1,72 @@
-let table=document.getElementById("table")
+"use strict";
+const mainContainer = document.getElementById("main-container");
+
 const getData = () => {
   const data = JSON.parse(localStorage.getItem("Employees"));
+  console.log(data);
   return data;
 };
+getData();
 
+// getting the data from localStorage
 
-function renderHeader(){
-    let tr = document.createElement("tr");
-    table.appendChild(tr);
+const getDataInsights = function (data) {
+  const statistics = [
+    {
+      department: "Administration",
+      noOfEmployees: 0,
+      avgSalary: 0,
+      totalSalaries: 0,
+    },
+    {
+      department: "Marketing",
+      noOfEmployees: 0,
+      avgSalary: 0,
+      totalSalaries: 0,
+    },
+    {
+      department: "Development",
+      noOfEmployees: 0,
+      avgSalary: 0,
+      totalSalaries: 0,
+    },
+    {
+      department: "Finance",
+      noOfEmployees: 0,
+      avgSalary: 0,
+      totalSalaries: 0,
+    },
+  ];
 
-    let columnName = document.createElement('th');
-    columnName.textContent = "Deoartment Name";
-    tr.appendChild(columnName);
+  // Extracting infos from localStorage recieved data
+  if (!data) return;
+  data.forEach((entry) => {
+    statistics.map((dep) => {
+      if (entry.Department === dep.department) {
+        dep.noOfEmployees++;
+        dep.totalSalaries += entry.salary;
+        dep.avgSalary = Math.round(dep.totalSalaries / dep.noOfEmployees);
+      }
+    });
+  });
 
-
-    let columnNumber = document.createElement('th');
-    columnNumber.textContent = "Number of Employees";
-    tr.appendChild(columnNumber);
-
-    let columnAvg = document.createElement('th');
-    columnAvg.textContent = "Average Salary";
-    tr.appendChild(columnAvg);
-
-    let columnTotal = document.createElement('th');
-    columnTotal.textContent = "total Salary";
-    tr.appendChild(columnTotal);
-}
-
+  return statistics;
+};
 
 const renderTable = function () {
   const data = getDataInsights(getData());
   let markup;
-
+  if (!data) markup = `<h3 class = "warning"> No Data to be displayed</h3>`;
+  else {
+    const total = {
+      totalNoOfEmployees: 0,
+      allDepsSalaries: 0,
+      avgAllSalaries: 0,
+    };
+    const formatter = new Intl.NumberFormat("us-EN", {
+      style: "currency",
+      currency: "USD",
+    });
     markup = `<table class="employees-info-table">
   <thead>
     <tr>
@@ -41,24 +76,33 @@ const renderTable = function () {
       <th>Total Salaries</th>
     </tr>
     </thead>
-         <td>${entry.department}</td>
+    ${data
+      .map((entry) => {
+        total.totalNoOfEmployees += entry.noOfEmployees;
+        total.allDepsSalaries += entry.totalSalaries;
+        total.avgAllSalaries = Math.round(
+          total.allDepsSalaries / total.totalNoOfEmployees
+        );
+        return `<tr>
+          <td>${entry.department}</td>
           <td>${entry.noOfEmployees}</td>
           <td>${formatter.format(entry.avgSalary)}</td>
           <td>${formatter.format(entry.totalSalaries)}</td>
-        </tr>
-        <tfoot>
-        <tr>
-            <td>Total</td>
-            <td>${total.totalNoOfEmployees}</td>
-            <td>${formatter.format(total.avgAllSalaries)}</td>
-            <td>${formatter.format(total.allDepsSalaries)}</td>
-        </tr>
-        </tfoot>
-      </table>`
-        
-      }
-     
-   
-    renderHeader();
+        </tr>`;
+      })
+      .join("")}
+    <tfoot>
+    <tr>
+        <td>Total</td>
+        <td>${total.totalNoOfEmployees}</td>
+        <td>${formatter.format(total.avgAllSalaries)}</td>
+        <td>${formatter.format(total.allDepsSalaries)}</td>
+    </tr>
+    </tfoot>
+  </table>`;
+  }
+  mainContainer.insertAdjacentHTML("beforeend", markup);
+};
 
 renderTable();
+

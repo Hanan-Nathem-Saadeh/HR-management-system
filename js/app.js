@@ -103,6 +103,8 @@ Employee.prototype.getSalary = function () {
         let totalSalary = randInteger (min  ,max );
         this.salary = totalSalary - totalSalary * 0.075;
 }
+
+
 function randInteger( min, max )
 {
 return Math.floor(Math.random()  * (max - min + 1) ) + min;
@@ -118,7 +120,9 @@ for (let i = 0; i <  allEmployee.length ; i++) {
     allEmployee[i].showEmploee();
 }
 
-  form.addEventListener("submit" , handelsubmit)
+  }
+
+  
   function handelsubmit(event)
   {
       
@@ -127,14 +131,15 @@ let FullName = event.target.nameInput.value;
 let Department =event.target.Department.value;
 let level =event.target.level.value;
 let ImageURL =event.target.ImageUrl.value;
- let newEmployee =new Employee(FullName,Department,Level,ImageURL);
+ let newEmployee =new Employee(FullName,Department,level,ImageURL);
 newEmployee.gitID();
 newEmployee.getSalary();
 newEmployee.showEmploee();
 form.reset();
 saveData();
 
-   }}
+   }
+   form.addEventListener("submit" , handelsubmit)
 
    renderAll();
    getData();
