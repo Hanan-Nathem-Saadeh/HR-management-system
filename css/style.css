@@ -1,4 +1,4 @@
- @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
 
 
 header {
@@ -83,6 +83,7 @@ a{
   display:grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap : 50px;
+  justify-items: center
  }
 
 
@@ -95,8 +96,10 @@ a{
 .divShow img
 {
 width: 150px;
-height: 150px;;
-
+height: 150px;
+position: relative;
+top: 1px;
+left: 70px;
 }
 
  .emps-cards {
@@ -121,20 +124,83 @@ height: 150px;;
   align-items: center;
 
 }
-thead
+/* thead
 {
 font-size: x-large;
 background-color: rgb(255, 62, 120);
 
 }
+tfoot
+{
 
+  font-weight: 100px;
+} */
+.employees-info-table {
+  width: 100%;
+  border: 1px solid var(--my-white);
+  font-size: 2rem;
+  border-collapse: collapse;
+  margin-top: 5rem;
+  text-align: center;
 
-/* .show img{
+}
+
+.employees-info-table td,
+.employees-info-table th {
+  border: 1px solid var(--my-white);
+  height: 100px;
+}
+
+.employees-info-table td {
+
+  font-size: 1.4rem;
+}
+
+.show img{
   background-color: azure;
 width: 100px;
 height:100px;
-} */
+}
+#allEmployeesDiv .divShow {
+background-color: rgb(255, 228, 243);
+  border: 2px solid #630056;
+  height: 400px;
+  width: 300px;
+  justify-items: center;
+} 
 
-/* .show {
-  border: 15px solid black;
-}   */
+
+
+
+.emp-info {
+  width: 100%;
+  padding: 10px 5px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 15px;
+  text-align: center;
+}
+
+h3 {
+  color: #630056;
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+.emp-info p {
+  background: var(--baby-blue);
+  font-size: 1rem;
+  font-weight: bold;
+  position: relative;
+  padding: 10px 0;
+}
+.emp-info p span {
+  position: absolute;
+  left: 2%;
+  color: var(--primary-color);
+  font-weight: bold;
+}

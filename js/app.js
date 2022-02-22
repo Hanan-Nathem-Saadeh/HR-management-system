@@ -22,7 +22,7 @@ let Tamara = new Employee("Tamara Ayoub","Marketing", "Senior","assets/img/Tamar
 let Safi = new Employee("Safi Walid","Administration","Mid-Senior","assets/img/Safi.jpg");
 let Omar = new Employee("Omar Zaid", "Development","Senior","assets/img/Omar.jpg");
 let Rana = new Employee("Rana Saleh","Development","Junior","assets/img/Rana.jpg");
-let Hadi = new Employee("Hadi Ahmad","Financen","Mid-Senior","assets/img/Hadi.jpg");
+let Hadi = new Employee("Hadi Ahmad","Finance","Mid-Senior","assets/img/Hadi.jpg");
 
 function generatId()
 {
