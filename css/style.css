@@ -154,12 +154,10 @@ tfoot
 .employees-info-table td {
 
   font-size: 1.4rem;
+  font-style: normal;
 }
 
-/* .employees-info-table td {
 
-  font-size: 1.4rem;
-} */
 .show img{
   background-color: azure;
 width: 100px;
