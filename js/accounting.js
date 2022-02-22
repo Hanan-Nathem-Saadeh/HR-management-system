@@ -6,7 +6,7 @@ const getData = () => {
   console.log(data);
   return data;
 };
-getData();
+// getData();
 
 // getting the data from localStorage
 
@@ -68,7 +68,7 @@ const renderTable = function () {
       currency: "USD",
     });
     markup = `<table class="employees-info-table">
-  <thead>
+      <thead>
     <tr>
       <th>Department Name</th>
       <th>Number of Employees</th>
